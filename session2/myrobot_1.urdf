@@ -6,6 +6,7 @@
     <material name="top_link_red">
         <color rgba="1 0 0 1"/>
     </material>
+    <link name="base_footprint"/>
     <link name="base_link">
         <visual>
             <geometry>
@@ -42,19 +43,28 @@
             <material name="top_link_red"/>
         </visual>
     </link>
+    <joint name="base_joint" type="fixed">
+        <parent link="base_footprint"/>
+        <child link="base_link"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <axis xyz="0 0 0"/>
+    </joint>
     <joint name="base_left_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="left_wheel_link"/>
         <origin xyz="-0.15 0.2 0.1" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
     </joint>
     <joint name="base_right_wheel_joint" type="continuous">
         <parent link="base_link"/>
         <child link="right_wheel_link"/>
         <origin xyz="-0.15 -0.2 0.1" rpy="0 0 0"/>
+        <axis xyz="0 1 0"/>
     </joint>
-    <joint name="base_caster_wheel_joint" type="continuous">
+    <joint name="base_caster_wheel_joint" type="fixed">
         <parent link="base_link"/>
         <child link="caster_wheel_link"/>
         <origin xyz="0.15 0 0.1" rpy="0 0 0"/>
+        <axis xyz="0 0 0"/>
     </joint>
 </robot>
