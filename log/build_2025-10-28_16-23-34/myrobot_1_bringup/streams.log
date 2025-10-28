@@ -1,0 +1,11 @@
+[0.007s] Invoking command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ir-t12/ir_ws/src/build/myrobot_1_bringup -- -j12 -l12
+[0.028s] Invoked command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ir-t12/ir_ws/src/build/myrobot_1_bringup -- -j12 -l12
+[0.034s] Invoking command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ir-t12/ir_ws/src/build/myrobot_1_bringup
+[0.038s] -- Install configuration: ""
+[0.038s] [31mCMake Error at cmake_install.cmake:46 (file):
+[0.039s]   file INSTALL cannot find
+[0.039s]   "/home/ir-t12/ir_ws/src/session3/myrobot_1_bringup/urdf": No such file or
+[0.039s]   directory.
+[0.039s] 
+[0.039s] [0m
+[0.039s] Invoked command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ir-t12/ir_ws/src/build/myrobot_1_bringup

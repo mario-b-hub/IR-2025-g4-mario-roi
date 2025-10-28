@@ -1,0 +1,6 @@
+[31mCMake Error at cmake_install.cmake:46 (file):
+  file INSTALL cannot find
+  "/home/ir-t12/ir_ws/src/session3/myrobot_1_bringup/urdf": No such file or
+  directory.
+
+[0m
