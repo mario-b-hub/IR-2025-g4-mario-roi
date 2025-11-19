@@ -1,9 +1,0 @@
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/uninstall.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/myrobot_1_bringup_uninstall.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/test.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/edit_cache.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/rebuild_cache.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/list_install_components.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/install.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/install/local.dir
-/home/ir-t12/ir_ws/src/build/myrobot_1_bringup/CMakeFiles/install/strip.dir

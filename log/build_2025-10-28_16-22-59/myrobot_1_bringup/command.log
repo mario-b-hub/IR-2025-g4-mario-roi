@@ -1,6 +1,0 @@
-Invoking command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/ir-t12/ir_ws/src/session3/myrobot_1_bringup -DCMAKE_INSTALL_PREFIX=/home/ir-t12/ir_ws/src/install/myrobot_1_bringup
-Invoked command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake /home/ir-t12/ir_ws/src/session3/myrobot_1_bringup -DCMAKE_INSTALL_PREFIX=/home/ir-t12/ir_ws/src/install/myrobot_1_bringup
-Invoking command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ir-t12/ir_ws/src/build/myrobot_1_bringup -- -j12 -l12
-Invoked command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --build /home/ir-t12/ir_ws/src/build/myrobot_1_bringup -- -j12 -l12
-Invoking command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ir-t12/ir_ws/src/build/myrobot_1_bringup
-Invoked command in '/home/ir-t12/ir_ws/src/build/myrobot_1_bringup' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble /usr/bin/cmake --install /home/ir-t12/ir_ws/src/build/myrobot_1_bringup
