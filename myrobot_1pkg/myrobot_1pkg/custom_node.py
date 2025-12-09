@@ -22,7 +22,12 @@ class MyCustomNode(Node):
         # 3. VARIABLE DE ESTADO:
         # Creamos una variable 'global' para la clase que guarde la distancia.
         # La iniciamos con un valor alto (camino libre) por seguridad.
-        self.front_dist = 10.0 
+        # VARIABLES DE ESTADO (Sensores Virtuales)
+        self.front_dist = 10.0
+        self.left_dist = 10.0
+        self.right_dist = 10.0
+        # 0: Avanzando, 1: Girando a Izquierda, 2: Girando a Derecha
+        self.state = 0
 
         # 4. TIMER (CEREBRO):
         # Ejecutamos la lógica de control cada 0.2 segundos
@@ -31,28 +36,96 @@ class MyCustomNode(Node):
         self.get_logger().info('MyCustomNode iniciado: Robot autónomo listo.')
 
     def scan_callback(self, msg):
-        # Esta función solo se encarga de ACTUALIZAR la "visión" del robot.
-        # En Turtlebot3, ranges[0] es el frente.
-        # Verificamos que existan datos para no romper el nodo
-        if len(msg.ranges) > 0:
-            self.front_dist = msg.ranges[0]
-            # Si el sensor devuelve 'inf' (infinito), lo tratamos como distancia máxima
-            if self.front_dist == float('inf'):
-                self.front_dist = 10.0
+        # Función auxiliar interna para calcular el promedio de un sector
+        def get_sector_distance(target_angle, window_deg=10):
+            # 1. Convertir ventana de grados a número de índices
+            # msg.angle_increment es radianes por índice
+            window_rad = (window_deg * 3.14159) / 180.0
+            half_window_indices = int(window_rad / msg.angle_increment / 2)
+            
+            # 2. Calcular índice central teórico para el ángulo deseado
+            # Fórmula: index = (angulo_deseado - angulo_minimo) / incremento
+            center_index = int((target_angle - msg.angle_min) / msg.angle_increment)
+            
+            # 3. Definir límites del array (start y end) con protección de desbordamiento
+            start = max(0, center_index - half_window_indices)
+            end = min(len(msg.ranges), center_index + half_window_indices + 1)
+            
+            # 4. Extraer y filtrar datos
+            sector = msg.ranges[start:end]
+            valid_readings = [r for r in sector if not (r == float('inf') or r == float('nan'))]
+            
+            if not valid_readings:
+                return 10.0 # Sin datos válidos, asumimos libre
+            return sum(valid_readings) / len(valid_readings)
+
+        # ACTUALIZACIÓN DE ESTADOS
+        # Frente (0 radianes)
+        self.front_dist = get_sector_distance(0.0)
+        
+        # Izquierda (aprox +45 grados = +0.78 rad)
+        self.left_dist = get_sector_distance(0.78)
+        
+        # Derecha (aprox -45 grados = -0.78 rad)
+        self.right_dist = get_sector_distance(-0.78)
+        
+        # Debug para verificar integridad (puedes comentarlo luego)
+        # self.get_logger().info(f'F: {self.front_dist:.2f} | L: {self.left_dist:.2f} | R: {self.right_dist:.2f}')  
 
     def control_loop(self):
-        # Esta es la función que el Timer llama repetidamente.
-        # Aquí va tu lógica "IF/ELSE" corregida.
+        # --- PARÁMETROS DEL CIRCUITO ---
+        STOP_DIST = 0.9       
+        RESUME_DIST = 2.5     
         
-        # Debug en terminal para saber qué ve el robot
-        # self.get_logger().info(f'Distancia frontal: {self.front_dist}')
+        # --- PARÁMETROS DE CENTRADO ---
+        KP = 0.3 
+        # CORRIDOR_LIMIT: Si una pared está más lejos que esto, 
+        # asumimos que es una esquina o cruce y NO corregimos.
+        CORRIDOR_LIMIT = 2.0 
 
-        if self.front_dist < 0.5:
-            # Hay obstáculo: Giramos sobre el eje (sin avanzar)
-            self.move_robot(0.0, -0.5) 
-        else:
-            # Camino libre: Avanzamos recto
-            self.move_robot(0.2, 0.0) 
+        # --- MÁQUINA DE ESTADOS ---
+        
+        if self.state == 0: # ESTADO: AVANZAR
+            if self.front_dist > STOP_DIST:
+                # Velocidad base
+                linear = 0.8
+                angular_correction = 0.0
+
+                # GUARDIA DE SEGURIDAD (La lógica que pediste):
+                # "Solo corregimos si AMBAS paredes están cerca"
+                if self.left_dist < CORRIDOR_LIMIT and self.right_dist < CORRIDOR_LIMIT:
+                    
+                    # Estamos en un pasillo cerrado: aplicamos P-Controller
+                    error = self.left_dist - self.right_dist
+                    angular_correction = KP * error
+                    
+                    # Limitador de seguridad para no oscilar
+                    angular_correction = max(-0.4, min(0.4, angular_correction))
+                
+                else:
+                    # Una de las paredes "ha desaparecido" (estamos en cruce/esquina).
+                    # DESACTIVAMOS el centrado para no girar hacia la pared contraria.
+                    # Mantenemos el rumbo recto hasta que la pared frontal nos detenga.
+                    angular_correction = 0.0
+                    # Opcional: Podrías bajar un poco la velocidad si estás inseguro
+                    # linear = 0.6 
+
+                self.move_robot(linear, angular_correction)
+                
+            else:
+                # Pared frontal detectada -> Iniciamos el giro de esquina
+                self.state = 1
+                self.get_logger().info(f'Esquina detectada ({self.front_dist:.2f}m). Giro a Izquierda.')
+
+        elif self.state == 1: # ESTADO: GIRAR A IZQUIERDA
+            if self.front_dist > RESUME_DIST:
+                self.state = 0 
+                self.get_logger().info('Pasillo alineado. Avanzando.')
+                self.move_robot(0.8, 0.0)
+            else:
+                self.move_robot(0.0, -0.8)
+
+
 
     def move_robot(self, linear, angular):
         # Función auxiliar para publicar el mensaje
