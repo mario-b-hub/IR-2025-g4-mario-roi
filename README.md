@@ -21,8 +21,7 @@ Instead of looking at 360 points, the algorithm abstracts the `LaserScan` data i
 * **Left Sector (+45 deg):** Measures lateral clearance.
 * **Right Sector (-45 deg):** Measures lateral clearance.
 
-> **[IMAGE PLACEHOLDER]**
-> *Description:* A top-down view of the robot in Gazebo/Rviz. Overlay three semi-transparent cones or colored lines projecting from the robot: A Red cone forward, a Blue cone 45° to the left, and a Green cone 45° to the right. Label them "Front", "Left Sector", and "Right Sector".
+> ![A top-down view of the robot in Gazebo. Overlay three red laser beams projecting from the robot's LiDAR.](LIDAR LASERS.png)
 
 ---
 
