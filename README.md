@@ -40,7 +40,7 @@ $$\omega_{correction} = K_p \times Error$$
 * If the robot is too close to the **left**, the error becomes negative, pushing the robot to the **right**.
 * If the robot is too close to the **right**, the error becomes positive, pushing the robot to the **left**.
 
-![Capture the robot moving through a straight corridor, but slightly off-center (closer to the left wall). Add an arrow indicating the robot's forward motion, and a curved arrow indicating the rotational correction being applied to push it back towards the center.](/AUTOMATIC_POSITON_CENTERING_DECISION.png)
+![Capture the robot moving through a straight corridor, but slightly off-center (closer to the right wall). A curved arrow indicating the rotational correction being applied to push it back towards the center.](/AUTOMATIC_POSITON_CENTERING_DECISION.png)
 
 ### State 1: The Decision Threshold (Cornering)
 When the Front Sector detects a wall closer than the threshold (`STOP_DIST`), the robot triggers a state transition. This is not a random turn; it is a **calculated decision** based on available geometry.
