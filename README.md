@@ -40,8 +40,7 @@ $$\omega_{correction} = K_p \times Error$$
 * If the robot is too close to the **left**, the error becomes negative, pushing the robot to the **right**.
 * If the robot is too close to the **right**, the error becomes positive, pushing the robot to the **left**.
 
-> **[IMAGE PLACEHOLDER]**
-> *Description:* Capture the robot moving through a straight corridor, but slightly off-center (closer to the left wall). Add an arrow indicating the robot's forward motion, and a curved arrow indicating the rotational correction being applied to push it back towards the center.
+![Capture the robot moving through a straight corridor, but slightly off-center (closer to the left wall). Add an arrow indicating the robot's forward motion, and a curved arrow indicating the rotational correction being applied to push it back towards the center.](AUTOMATIC_POSITON_CENTERING_DECISION.png)
 
 ### State 1: The Decision Threshold (Cornering)
 When the Front Sector detects a wall closer than the threshold (`STOP_DIST`), the robot triggers a state transition. This is not a random turn; it is a **calculated decision** based on available geometry.
@@ -54,8 +53,7 @@ When the Front Sector detects a wall closer than the threshold (`STOP_DIST`), th
 
 This dynamic decision-making allows the robot to handle T-junctions and Cross-junctions by mathematically choosing the "path of least resistance" (the largest opening).
 
-> **[IMAGE PLACEHOLDER]**
-> *Description:* The robot facing a T-junction (a wall directly in front, open space to the left and right). Add text bubbles or overlays: "Front Blocked (< 1.0m)". Show "Left Dist: 5.0m" and "Right Dist: 1.0m" to visually justify why the robot is about to turn Left.
+![The robot facing a L-junction (a wall directly in front, open space to the left). Text overlays: Show "Left Dist: 1.2m" and "Right Dist: 0.5m" to visually justify why the robot is about to turn Left.](TURN_ORIENTATION_DECISION.png)
 
 ---
 
@@ -68,8 +66,7 @@ A common failure point in reactive robots is "jittering" at the threshold of a s
 
 This gap ensures the robot completes the turn fully and is facing a clear long corridor before it attempts to switch back to the "Cruise" logic. This prevents the robot from trying to drive forward while still facing the corner of a wall.
 
-> **[IMAGE PLACEHOLDER]**
-> *Description:* A diagram showing the robot performing a 90-degree turn. Mark the start of the turn with a line labeled "Stop Threshold (1.0m)" and the end of the turn (when it's facing the new path) with a further line labeled "Resume Threshold (2.5m)".
+![A render showing the robot performing a 90-degree turn. Mark the state of the robot (wich is STOPED) with a red circle on the flor. A overlay text: Mesuring distance: 1.0m, justifying why the robot has stop.](STOP_STATE_DECISON.png)
 
 ---
 
