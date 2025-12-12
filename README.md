@@ -68,8 +68,6 @@ A common failure point in reactive robots is "jittering" at the threshold of a s
 
 This gap ensures the robot completes the turn fully and is facing a clear long corridor before it attempts to switch back to the "Cruise" logic. This prevents the robot from trying to drive forward while still facing the corner of a wall.
 
->**Place holder [IMAGE]**
-
 ---
 
 ## Technical Specifications & Tuning
