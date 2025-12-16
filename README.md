@@ -80,4 +80,13 @@ This gap ensures the robot completes the turn fully and is facing a clear long c
 | `Control Loop` | 0.2s | Frequency of the decision cycle (5 Hz). |
 
 ## How to Run
-*(Include here your specific commands to launch the simulation and the node)*
+```bash
+~/ir_ws$ colcon build
+~/ir_ws$ source ~/.bashrc
+~/ir_ws$ ros2 launch osr_bringup maze_simulation.launch.py maze:=maze_1.world
+~/ir_ws$ ros2 launch osr_bringup maze_simulation.launch.py maze:=maze_2.world
+~/ir_ws$ ros2 launch osr_bringup maze_simulation.launch.py maze:=maze_3.world
+
+~$ ros2 run myrobot_1pkg custom_node
+```
+![CodeLine.](/CodeLine.png)
